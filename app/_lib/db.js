@@ -4,11 +4,11 @@ let pool;
 
 if (!pool) {
   pool = mysql.createPool({
-    host: process.env.MYSQL_HOST || "localhost",
-    user: process.env.MYSQL_USER || "root",
-    password: process.env.MYSQL_PASSWORD || "cvv@1234",
-    database: process.env.MYSQL_DATABASE || "yatra_trip",
-    port: process.env.MYSQL_PORT || 3306,
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.MYSQL_PORT,
   });
   console.log("MySQL Connection Pool Initialized");
 }
