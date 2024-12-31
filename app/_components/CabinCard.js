@@ -10,9 +10,8 @@ function CabinCard({ cabin }) {
     <div className="flex border-primary-800 border">
       <div className="flex-1 relative">
         <Image
-          src={
-            "https://mhsqugfickzcplshtbuy.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg"
-          }
+          src={`/${image}`}
+          // src="/about-1.jpg"
           fill
           alt={`Cabin ${name}`}
           className="object-cover border-r border-primary-800"

@@ -9,10 +9,7 @@ function Cabin({ cabin }) {
     <div className="grid grid-cols-[3fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
       <div className="relative scale-[1.15] -translate-x-3">
         <Image
-          src={
-            image ||
-            "https://mhsqugfickzcplshtbuy.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg"
-          }
+          src={`/${image}`}
           fill
           className="object-cover border-r border-primary-800"
           alt={`Cabin ${name}`}

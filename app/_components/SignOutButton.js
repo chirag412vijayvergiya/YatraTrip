@@ -3,8 +3,11 @@ import { signOut } from "next-auth/react";
 
 function SignOutButton() {
   const handleSignOut = async () => {
-    // Call the sign-out function, which will be executed on the server side
-    await signOut();
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Error during sign out:", error);
+    }
   };
 
   return (

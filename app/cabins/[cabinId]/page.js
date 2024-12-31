@@ -1,7 +1,7 @@
 import Cabin from "@/app/_components/Cabin";
 import Reservation from "@/app/_components/Reservation";
 import Spinner from "@/app/_components/Spinner";
-import { getCabin, getCabins } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-services";
 import { Suspense } from "react";
 
 // PLACEHOLDER DATA
@@ -24,7 +24,9 @@ import { Suspense } from "react";
 // export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
-  const cabin = await getCabin(params.cabinId);
+  const { cabinId } = await params;
+
+  const cabin = await getCabin(cabinId);
   const { name } = cabin;
 
   return {
@@ -43,14 +45,16 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }) {
-  const cabin = await getCabin(params.cabinId); // 1
+  const { cabinId } = await params;
+
+  const cabin = await getCabin(cabinId); // 1
   // const settings = await getSettings(); // 2
   // const bookingDates = await getBookedDatesByCabinId(params.cabinId); // 3
   // if 1st will take 2 seconds , 2nd will take 2 seconds but actually it will take (2 + 2), so 3rd will take 6 + 2(own) seconds, so it is not a good approach for fetching data
   // These will be a good approach for fetching data :-
 
   return (
-    <div className="max-w-6xl mx-auto mt-8">
+    <div className="max-w-10xl mx-auto mt-8">
       <Cabin cabin={cabin} />
 
       <div>

@@ -1,15 +1,15 @@
 import SelectCountry from "@/app/_components/SelectCountry";
 import UpdateProfile from "@/app/_components/UpdateProfile";
-import { auth } from "@/app/_lib/auth";
-import { getGuest } from "@/app/_lib/data-service";
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getGuest } from "@/app/_lib/data-services";
 export const metadata = {
   title: "Update Profile",
   description: "Update your guest profile",
 };
 
 export default async function Page() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
   const guest = await getGuest(session.user.email);
 
   return (

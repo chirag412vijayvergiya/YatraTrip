@@ -4,10 +4,11 @@ import { differenceInDays } from "date-fns";
 import { useReservation } from "./ReservationContext";
 import { createBooking } from "../_lib/actions";
 import SubmitButton from "./SubmitButton";
+import Image from "next/image";
 
 function ReservationForm({ cabin, user }) {
-  // CHANGE
   const { range, resetRange } = useReservation();
+
   const { maxCapacity, regularPrice, discount, id } = cabin;
 
   const startDate = range.from;
@@ -33,12 +34,13 @@ function ReservationForm({ cabin, user }) {
         <p>Logged in as</p>
 
         <div className="flex gap-4 items-center">
-          <img
-            // Important to display google profile images
-            referrerPolicy="no-referrer"
-            className="h-8 rounded-full"
+          <Image
             src={user.image}
             alt={user.name}
+            className="h-8 rounded-full"
+            width={32}
+            height={32}
+            referrerPolicy="no-referrer"
           />
           <p>{user.name}</p>
         </div>
@@ -88,7 +90,7 @@ function ReservationForm({ cabin, user }) {
 
         <div className="flex justify-end items-center gap-6">
           {!(startDate && endDate) ? (
-            <p className="text-primary-300 text-base">
+            <p className="text-primary-300 text-base py-4">
               Start by selecting dates
             </p>
           ) : (

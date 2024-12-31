@@ -30,10 +30,17 @@
   }
 }
 
-/* For data picker */
-.rdp {
-  --rdp-cell-size: 32px !important;
+/* For date picker */
+.rdp-root {
+  /* --rdp-day-height: 30px; 
+  --rdp-day-width: 30px; 
+  --rdp-day_button-height: 30px; 
+  --rdp-day_button-width: 30px;  */
   --rdp-accent-color: theme("colors.accent.500") !important;
-  --rdp-background-color: theme("colors.accent.600") !important;
+  --rdp-accent-background-color: theme("colors.accent.600") !important;
+  --rdp-dropdown-gap: 10px !important;
+  --rdp-months-gap: 10px !important;
+  --rdp-day-height: 30px !important;
+  --rdp-day-width: 30px !important;
   margin: 0 !important;
 }

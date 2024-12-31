@@ -1,17 +1,20 @@
 import ReservationList from "@/app/_components/ReservationList";
-import { auth } from "@/app/_lib/auth";
-import { getBookings } from "@/app/_lib/data-service";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./../../api/auth/[...nextauth]/route";
+import { getBookings } from "@/app/_lib/data-services";
 
 export const metadata = {
   title: "Reservations",
 };
 
 export default async function Page() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
+
+  // console.log("From Reservation :- ", session);
 
   const bookings = await getBookings(session.user.guestId);
 
-  // console.log(bookings);
+  console.log(bookings);
 
   return (
     <div>

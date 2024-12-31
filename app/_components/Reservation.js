@@ -1,5 +1,7 @@
-import { auth } from "../_lib/auth";
-import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
+import { getBookedDatesByCabinId, getSettings } from "@/app/_lib/data-services";
 import DateSelector from "./DateSelector";
 import LoginMessage from "./LoginMessage";
 import ReservationForm from "./ReservationForm";
@@ -10,7 +12,10 @@ async function Reservation({ cabin }) {
     getBookedDatesByCabinId(cabin.id),
   ]);
 
-  const session = await auth();
+  const session = await getServerSession(authOptions);
+
+  console.log(session);
+
   return (
     <div className="grid grid-cols-2 border border-primary-800 min-h-[400px] ">
       <DateSelector

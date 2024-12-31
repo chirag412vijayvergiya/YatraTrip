@@ -2,6 +2,7 @@ import { Josefin_Sans } from "next/font/google";
 import "@/app/_styles/globals.css";
 import Header from "./_components/Header";
 import { ReservationProvider } from "./_components/ReservationContext";
+import Footer from "./_components/Footer";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -9,12 +10,12 @@ const josefin = Josefin_Sans({
 });
 
 export const metadata = {
-  // title: "The Wild Oasis",
+  // title: "The YatraTrip",
   title: {
-    template: "%s | The Wild Oasis",
-    default: "Welcome | The Wild Oasis",
+    template: "%s | The YatraTrip",
+    default: "Welcome | The YatraTrip",
   },
-  description: "The Wild Oasis - A place to relax and enjoy nature",
+  description: "The YatraTrip - A place to relax and enjoy nature",
 };
 
 export default function RootLayout({ children }) {
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
             <ReservationProvider>{children}</ReservationProvider>
           </main>
         </div>
+        <Footer />
       </body>
     </html>
   );

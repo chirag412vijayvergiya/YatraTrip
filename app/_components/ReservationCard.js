@@ -10,25 +10,44 @@ export const formatDistanceFromNow = (dateStr) =>
   }).replace("about ", "");
 
 function ReservationCard({ booking, onDelete }) {
+  console.log(booking);
+  // const {
+  //   id,
+  //   userId,
+  //   startDate = new Date(),
+  //   endDate,
+  //   numNights,
+  //   totalPrice,
+  //   numGuests,
+  //   status,
+  //   created_at,
+  //   cabinName,
+  //   cabinImage,
+  // } = booking;
   const {
     id,
-    guestId,
-    startDate,
-    endDate,
+    userId,
     numNights,
     totalPrice,
     numGuests,
     status,
-    created_at,
-    cabins: { name, image },
+    created_at: rawCreatedAt,
+    cabinName,
+    cabinImage,
+    startDate: rawStartDate,
+    endDate: rawEndDate,
   } = booking;
+
+  const startDate = new Date(rawStartDate).toISOString();
+  const endDate = new Date(rawEndDate).toISOString();
+  const created_at = new Date(rawCreatedAt).toISOString();
 
   return (
     <div className="flex border border-primary-800">
       <div className="relative h-32 aspect-square">
         <Image
-          src={image}
-          alt={`Cabin ${name}`}
+          src={`/${cabinImage}`}
+          alt={`Cabin ${cabinName}`}
           className="object-cover border-r border-primary-800"
           layout="fill"
           objectFit="cover"
@@ -38,7 +57,7 @@ function ReservationCard({ booking, onDelete }) {
       <div className="flex-grow px-6 py-3 flex flex-col">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-semibold">
-            {numNights} nights in Cabin {name}
+            {numNights} nights in Cabin {cabinName}
           </h3>
           {isPast(new Date(startDate)) ? (
             <span className="bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
