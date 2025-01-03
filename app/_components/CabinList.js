@@ -4,7 +4,7 @@ import { getCabins } from "../_lib/data-services";
 
 async function CabinList({ filter }) {
   noStore();
-  console.log("starting");
+  // console.log("starting");
   const cabins = await getCabins();
 
   if (!cabins.length) return null;

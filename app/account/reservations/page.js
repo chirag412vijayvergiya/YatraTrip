@@ -14,7 +14,7 @@ export default async function Page() {
 
   const bookings = await getBookings(session.user.guestId);
 
-  console.log(bookings);
+  // console.log(bookings);
 
   return (
     <div>

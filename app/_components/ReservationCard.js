@@ -10,7 +10,7 @@ export const formatDistanceFromNow = (dateStr) =>
   }).replace("about ", "");
 
 function ReservationCard({ booking, onDelete }) {
-  console.log(booking);
+  // console.log(booking);
   // const {
   //   id,
   //   userId,
@@ -39,6 +39,7 @@ function ReservationCard({ booking, onDelete }) {
   } = booking;
 
   const startDate = new Date(rawStartDate).toISOString();
+  const pstartDate = parseISO(rawStartDate);
   const endDate = new Date(rawEndDate).toISOString();
   const created_at = new Date(rawCreatedAt).toISOString();
 
@@ -49,8 +50,9 @@ function ReservationCard({ booking, onDelete }) {
           src={`/${cabinImage}`}
           alt={`Cabin ${cabinName}`}
           className="object-cover border-r border-primary-800"
-          layout="fill"
-          objectFit="cover"
+          fill={true}
+          sizes="100%"
+          style={{ objectFit: "cover" }}
         />
       </div>
 
@@ -59,7 +61,7 @@ function ReservationCard({ booking, onDelete }) {
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {cabinName}
           </h3>
-          {isPast(new Date(startDate)) ? (
+          {isPast(pstartDate) ? (
             <span className="bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
               past
             </span>
@@ -91,7 +93,7 @@ function ReservationCard({ booking, onDelete }) {
       </div>
 
       <div className="flex flex-col border-l border-primary-800 w-[100px]">
-        {!isPast(startDate) ? (
+        {!isPast(pstartDate) ? (
           <>
             <Link
               href={`/account/reservations/edit/${id}`}

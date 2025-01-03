@@ -6,7 +6,7 @@ import Image from "next/image";
 export default async function Navigation() {
   const session = await getServerSession(authOptions);
 
-  console.log(session);
+  // console.log(session);
 
   return (
     <nav className="z-10 text-xl">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import "./_lib/server-events";
 import bg from "@/public/bg.png";
 
 export default function Page() {

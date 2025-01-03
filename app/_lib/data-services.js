@@ -7,7 +7,7 @@ export async function createGuest(newGuest) {
   try {
     // Insert data into the users table
 
-    console.log("//////////////////////", newGuest);
+    // console.log("//////////////////////", newGuest);
     const result = await executeQuery(
       "INSERT INTO users (email, fullName) VALUES (?, ?)",
       [email, fullName]
@@ -43,15 +43,16 @@ export async function getGuest(email) {
     throw new Error("Guest could not be fetched.");
   }
 }
-
 export async function getCountries() {
   try {
     const res = await fetch(
       "https://restcountries.com/v2/all?fields=name,flag"
     );
+
     const countries = await res.json();
     return countries;
-  } catch {
+  } catch (error) {
+    console.error("Error fetching countries: ", error);
     throw new Error("Could not fetch countries");
   }
 }
@@ -142,6 +143,8 @@ export async function getSettings() {
 }
 
 export async function getBookings(guestId) {
+  // console.log("Guest ID :- ", guestId);
+
   const query = `
     SELECT 
       b.id, 
@@ -166,9 +169,24 @@ export async function getBookings(guestId) {
   `;
   try {
     const data = await executeQuery(query, [guestId]);
+    // console.log("Get Bookings :- ", data);
     return data;
   } catch (error) {
     console.error("Error fetching bookings:", error.message);
     throw new Error("Bookings could not be loaded");
+  }
+}
+
+export async function getBooking(bookingId) {
+  const query = `
+    SELECT 
+      * FROM bookings WHERE id = ?;
+  `;
+  try {
+    const [booking] = await executeQuery(query, [bookingId]);
+    return booking;
+  } catch (error) {
+    console.error("Error fetching booking:", error.message);
+    throw new Error("Booking could not be loaded");
   }
 }
