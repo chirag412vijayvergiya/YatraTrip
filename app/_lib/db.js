@@ -67,11 +67,16 @@ export async function closePool() {
 
 export async function executeQuery(query, values = []) {
   try {
+    connection = await pool.getConnection();
+
     const [results] = await pool.query(query, values);
     return results;
   } catch (error) {
     console.error("Database Query Error:", error);
     throw error;
+  } finally {
+    // Always release the connection back to the pool
+    if (connection) connection.release();
   }
 }
 
