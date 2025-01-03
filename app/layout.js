@@ -19,14 +19,29 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // return (
+  //   <html lang="en">
+  //     <body
+  //       className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col`}
+  //     >
+  //       <Header />
+  //       <div className="flex-1 px-8 py-12 grid">
+  //         <main className="max-w-7xl  mx-auto w-full">
+  //           <ReservationProvider>{children}</ReservationProvider>
+  //         </main>
+  //       </div>
+  //       <Footer />
+  //     </body>
+  //   </html>
+  // );
   return (
     <html lang="en">
       <body
         className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col`}
       >
         <Header />
-        <div className="flex-1 px-8 py-12 grid">
-          <main className="max-w-7xl  mx-auto w-full">
+        <div className="flex-1 px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grid">
+          <main className="max-w-7xl mx-auto w-full">
             <ReservationProvider>{children}</ReservationProvider>
           </main>
         </div>
