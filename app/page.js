@@ -5,12 +5,12 @@ import bg from "@/public/bg.png";
 
 export default function Page() {
   return (
-    <main className="mt-24">
+    <main className="mt-24 ">
       <Image
         src={bg}
-        alt="Mountains and forests with two cabins"
+        alt="Mountains and forests with two cabins "
         fill
-        className="object-cover object-top h-screen w-full"
+        className="object-cover object-top w-full min-h-full"
         placeholder="blur"
         quality={80}
       />
