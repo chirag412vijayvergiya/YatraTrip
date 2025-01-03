@@ -36,7 +36,7 @@ export async function getGuest(email) {
       email,
     ]);
 
-    console.log("Guest fetched:", guest);
+    // console.log("Guest fetched:", guest);
     return guest;
   } catch (error) {
     console.error("Error fetching guest:", error.message);
@@ -66,7 +66,7 @@ export async function getCabins() {
 
   try {
     const data = await executeQuery(query);
-    console.log("Get Cabins :- ", data);
+    // console.log("Get Cabins :- ", data);
     return data; // Return the retrieved cabins data
   } catch (error) {
     console.error("Error loading cabins:", error.message);
