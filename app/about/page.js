@@ -4,7 +4,7 @@ import image2 from "@/public/about-2.jpg";
 import { getCabins } from "../_lib/data-services";
 import Link from "next/link";
 
-export const revalidate = 24 * 60 * 60;
+// export const revalidate = 24 * 60 * 60;
 
 export const metadata = {
   title: "About",
