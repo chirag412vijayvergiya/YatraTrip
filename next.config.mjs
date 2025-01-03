@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-// import "./app/_lib/server-events";
+import "./app/_lib/server-events.js";
 
 const nextConfig = {
   images: {
