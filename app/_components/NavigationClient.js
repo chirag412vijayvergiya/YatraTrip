@@ -10,7 +10,6 @@ export default function NavigationClient({ session }) {
   const navItems = [
     { name: "Cabins", href: "/cabins" },
     { name: "About", href: "/about" },
-    { name: "Account", href: session?.user ? "/account" : "/guest" },
   ];
 
   return (
@@ -122,7 +121,7 @@ export default function NavigationClient({ session }) {
             </li>
           ))}
           {session?.user?.image && (
-            <li>
+            <li onClick={() => setMenuOpen(false)}>
               <Link
                 href="/account"
                 className="hover:text-accent-400 transition-colors flex items-center gap-2"
@@ -141,8 +140,6 @@ export default function NavigationClient({ session }) {
           )}
         </ul>
       </div>
-
-      {/* //{" "} */}
     </>
   );
 }
