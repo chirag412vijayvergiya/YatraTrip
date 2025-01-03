@@ -36,7 +36,7 @@ export async function getGuest(email) {
       email,
     ]);
 
-    // console.log("Guest fetched:", guest);
+    console.log("Guest fetched:", guest);
     return guest;
   } catch (error) {
     console.error("Error fetching guest:", error.message);
