@@ -66,6 +66,7 @@ export async function closePool() {
 }
 
 export async function executeQuery(query, values = []) {
+  let connection;
   try {
     connection = await pool.getConnection();
 
