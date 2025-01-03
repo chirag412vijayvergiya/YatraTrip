@@ -65,19 +65,39 @@ export async function closePool() {
   }
 }
 
+// export async function executeQuery(query, values = []) {
+//   let connection;
+//   try {
+//     connection = await pool.getConnection();
+
+//     const [results] = await pool.query(query, values);
+//     return results;
+//   } catch (error) {
+//     console.error("Database Query Error:", error);
+//     throw error;
+//   } finally {
+//     // Always release the connection back to the pool
+//     if (connection) connection.release();
+//   }
+// }
+
 export async function executeQuery(query, values = []) {
   let connection;
   try {
-    connection = await pool.getConnection();
-
-    const [results] = await pool.query(query, values);
+    connection = await mysql.createConnection({
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DATABASE,
+      port: process.env.MYSQL_PORT,
+    });
+    const [results] = await connection.execute(query, values);
     return results;
   } catch (error) {
     console.error("Database Query Error:", error);
     throw error;
   } finally {
-    // Always release the connection back to the pool
-    if (connection) connection.release();
+    if (connection) await connection.end(); // Ensure connection is closed
   }
 }
 
