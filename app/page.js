@@ -6,16 +6,14 @@ import bg from "@/public/bg.png";
 export default function Page() {
   return (
     <main className="mt-24">
-      <div className="relative w-full h-screen">
-        <Image
-          src={bg}
-          alt="Mountains and forests with two cabins"
-          fill
-          className="object-cover object-top"
-          placeholder="blur"
-          quality={80}
-        />
-      </div>
+      <Image
+        src={bg}
+        alt="Mountains and forests with two cabins"
+        fill
+        className="object-cover object-top h-screen w-full"
+        placeholder="blur"
+        quality={80}
+      />
 
       <div className="relative z-10 text-center">
         <h1 className="md:text-8xl text-4xl text-primary-50 mb-10 tracking-tight font-normal">
