@@ -19,7 +19,7 @@ export const socialLinks = [
 
 function Footer() {
   return (
-    <footer className="flex flex-col mx-auto w-full gap-y-7 py-6 border-primary-900  bg-primary-900 text-white">
+    <footer className="flex flex-col mx-auto w-full gap-y-7 py-6 border-primary-900  bg-primary-950 text-white">
       <div className="flex flex-col items-center gap-x-24 gap-y-12 md:flex-row md:items-start md:justify-around md:gap-0">
         {/* Left side: Logo */}
         <div className="flex flex-col items-center gap-y-3 px-4 text-center sm:items-start md:text-start z-10">
