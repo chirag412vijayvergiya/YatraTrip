@@ -101,7 +101,7 @@ export default async function Page() {
             and care, passing down through our family as a testament to our
             dedication to creating a warm, welcoming environment.
           </p>
-          <p>
+          <p className="mt-4">
             Over the years, we&apos;ve maintained the essence of The YatraTrip,
             blending the timeless beauty of the mountains with the personal
             touch only a family business can offer. Here, you&apos;re not just a
