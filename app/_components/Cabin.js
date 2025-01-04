@@ -60,7 +60,7 @@ function Cabin({ cabin }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[3fr_4fr] gap-6 md:gap-20 border border-primary-800 py-3 px-6 md:px-10 mb-10 md:mb-24">
       {/* Image Container */}
-      <div className="relative md:scale-[1.15] h-64 md:h-full scale-100 w-full translate-x-0 overflow-hidden">
+      <div className="relative scale-[1.15] h-64 md:h-full w-full translate-x-0 overflow-hidden">
         <Image
           src={`/${image}`}
           fill
