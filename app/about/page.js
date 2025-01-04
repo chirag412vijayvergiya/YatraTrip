@@ -3,6 +3,7 @@ import image1 from "@/public/about-1.jpg";
 import image2 from "@/public/about-2.jpg";
 import { getCabins } from "../_lib/data-services";
 import Link from "next/link";
+import TextExpander from "../_components/TextExpander";
 
 // export const revalidate = 24 * 60 * 60;
 
@@ -15,13 +16,13 @@ export default async function Page() {
   const cabins = await getCabins();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-5 gap-x-6 gap-y-16 md:gap-x-24 md:gap-y-32 text-lg items-center px-6 md:px-12 lg:px-18">
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-x-6 gap-y-16 md:gap-x-24 md:gap-y-32 text-md items-center px-6 md:px-12 lg:px-18">
       <div className="col-span-1 md:col-span-3">
-        <h1 className="text-3xl md:text-4xl mb-6 md:mb-10 text-accent-400 font-medium">
+        <h1 className="text-xl md:text-4xl mb-6 md:mb-10 text-accent-400 font-medium">
           Welcome to The YatraTrip
         </h1>
 
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-8 hidden md:block">
           <p>
             Where nature&apos;s beauty and comfortable living blend seamlessly.
             Hidden away in the heart of the Italian Dolomites, this is your
@@ -40,6 +41,33 @@ export default async function Page() {
             nature&apos;s splendor. It&apos;s a place to slow down, relax, and
             feel the joy of being together in a beautiful setting.
           </p>
+        </div>
+        <div className="space-y-8 md:hidden">
+          <TextExpander NumberOfWords={40}>
+            <>
+              <p>
+                Where nature&apos;s beauty and comfortable living blend
+                seamlessly. Hidden away in the heart of the Italian Dolomites,
+                this is your paradise away from home. But it&apos;s not just
+                about the luxury cabins. It&apos;s about the experience of
+                reconnecting with nature and enjoying simple pleasures with
+                family.
+              </p>
+
+              <p className="mt-4">
+                Our {cabins.length} luxury cabins provide a cozy base, but the
+                real freedom and peace you&apos;ll find in the surrounding
+                mountains. Wander through lush forests, breathe in the fresh
+                air, and watch the stars twinkle above from the warmth of a
+                campfire or your hot tub.
+              </p>
+              <p className="mt-4">
+                This is where memorable moments are made, surrounded by
+                nature&apos;s splendor. It&apos;s a place to slow down, relax,
+                and feel the joy of being together in a beautiful setting.
+              </p>
+            </>
+          </TextExpander>
         </div>
       </div>
 
@@ -62,11 +90,11 @@ export default async function Page() {
       </div>
 
       <div className="col-span-1 md:col-span-3">
-        <h1 className="text-3xl md:text-4xl mb-6 md:mb-10 text-accent-400 font-medium">
+        <h1 className="text-xl md:text-4xl mb-6 md:mb-10 text-accent-400 font-medium">
           Managed by our family since 1962
         </h1>
 
-        <div className="space-y-6 md:space-y-8">
+        <div className="space-y-8 hidden md:block">
           <p>
             Since 1962, The YatraTrip has been a cherished family-run retreat.
             Started by our grandparents, this haven has been nurtured with love
@@ -81,6 +109,28 @@ export default async function Page() {
             YatraTrip soon, where tradition meets tranquility, and every visit
             is like coming home.
           </p>
+        </div>
+
+        <div className="space-y-8 md:hidden">
+          <TextExpander NumberOfWords={40}>
+            <>
+              <p>
+                Since 1962, The YatraTrip has been a cherished family-run
+                retreat. Started by our grandparents, this haven has been
+                nurtured with love and care, passing down through our family as
+                a testament to our dedication to creating a warm, welcoming
+                environment.
+              </p>
+              <p>
+                Over the years, we&apos;ve maintained the essence of The
+                YatraTrip, blending the timeless beauty of the mountains with
+                the personal touch only a family business can offer. Here,
+                you&apos;re not just a guest; you&apos;re part of our extended
+                family. So join us at The YatraTrip soon, where tradition meets
+                tranquility, and every visit is like coming home.
+              </p>
+            </>
+          </TextExpander>
         </div>
       </div>
       <div className="relative col-span-1 md:col-span-2 aspect-square md:hidden">
