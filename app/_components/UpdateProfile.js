@@ -11,7 +11,7 @@ function UpdateProfile({ guest, children }) {
 
   return (
     <form
-      className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
+      className="bg-primary-900 py-4 md:py-8 px-4 md:px-12 text-sm flex gap-6 flex-col"
       action={updateGuest}
     >
       <div className="space-y-2">
@@ -20,7 +20,7 @@ function UpdateProfile({ guest, children }) {
           disabled
           defaultValue={fullName}
           name="fullName"
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className="px-5 py-2 md:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
       </div>
 
@@ -30,7 +30,7 @@ function UpdateProfile({ guest, children }) {
           disabled
           defaultValue={email}
           name="email"
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
+          className="px-5 py-2 md:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
         />
       </div>
 
@@ -42,7 +42,7 @@ function UpdateProfile({ guest, children }) {
             alt="Country flag"
             width={32}
             height={20}
-            className="h-5 rounded-sm"
+            className="md:h-5 h-3 rounded-sm"
           />
         </div>
         {children}
@@ -53,7 +53,7 @@ function UpdateProfile({ guest, children }) {
         <input
           name="nationalID"
           defaultValue={nationalID}
-          className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
+          className="px-5 py-2 md:py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
         />
       </div>
 
