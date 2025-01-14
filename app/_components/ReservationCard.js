@@ -44,8 +44,8 @@ function ReservationCard({ booking, onDelete }) {
   const created_at = new Date(rawCreatedAt).toISOString();
 
   return (
-    <div className="flex border border-primary-800">
-      <div className="relative h-32 aspect-square">
+    <div className="flex flex-col md:flex-row border border-primary-800">
+      <div className="relative h-28 md:h-32 aspect-square">
         <Image
           src={`/${cabinImage}`}
           alt={`Cabin ${cabinName}`}
@@ -56,23 +56,23 @@ function ReservationCard({ booking, onDelete }) {
         />
       </div>
 
-      <div className="flex-grow px-6 py-3 flex flex-col">
+      <div className="flex-grow md:px-6 px-3 md:py-3 py-2 flex flex-col">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold">
+          <h3 className="md:text-xl text-lg font-semibold">
             {numNights} nights in Cabin {cabinName}
           </h3>
           {isPast(pstartDate) ? (
-            <span className="bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
+            <span className="bg-yellow-800 text-yellow-200 md:h-7 h-5 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
               past
             </span>
           ) : (
-            <span className="bg-green-800 text-green-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
+            <span className="bg-green-800 text-green-200 md:h-7 h-5 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
               upcoming
             </span>
           )}
         </div>
 
-        <p className="text-lg text-primary-300">
+        <p className="text-sm md:text-lg text-primary-300">
           {format(new Date(startDate), "EEE, MMM dd yyyy")} (
           {isToday(new Date(startDate))
             ? "Today"
@@ -80,27 +80,32 @@ function ReservationCard({ booking, onDelete }) {
           ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
         </p>
 
-        <div className="flex gap-5 mt-auto items-baseline">
+        <div className="flex gap-5 mt-auto items-baseline flex-row">
           <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
-          <p className="text-primary-300">&bull;</p>
-          <p className="text-lg text-primary-300">
-            {numGuests} guest{numGuests > 1 && "s"}
-          </p>
-          <p className="ml-auto text-sm text-primary-400">
+          <div className="flex gap-2">
+            <p className="text-primary-300">&bull;</p>
+            <p className="text-sm md:text-lg text-primary-300">
+              {numGuests} guest{numGuests > 1 && "s"}
+            </p>
+          </div>
+          <p className="ml-auto hidden md:block text-[0.4rem] md:text-sm text-primary-400">
             Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
           </p>
         </div>
+        <p className="ml-auto text-[0.5rem] md:hidden block md:text-sm text-primary-400">
+          Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
+        </p>
       </div>
 
-      <div className="flex flex-col border-l border-primary-800 w-[100px]">
+      <div className="flex flex-row md:flex-col border-t md:border-l border-primary-800 md:w-[100px] py-2 md:py-0">
         {!isPast(pstartDate) ? (
           <>
             <Link
               href={`/account/reservations/edit/${id}`}
-              className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 border-b border-primary-800 flex-grow px-3 hover:bg-accent-600 transition-colors hover:text-primary-900"
+              className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 md:border-b border-r border-primary-800 flex-grow md:px-3 px-6 hover:bg-accent-600 transition-colors hover:text-primary-900"
             >
               <PencilSquareIcon className="h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors" />
-              <span className="mt-1">Edit</span>
+              <span className="mt-1 ">Edit</span>
             </Link>
             <DeleteReservation bookingId={id} onDelete={onDelete} />
           </>
