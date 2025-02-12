@@ -59,7 +59,7 @@ function Chatbot() {
 
       {/* Chatbot Window */}
       <div
-        className={`fixed bottom-20 right-4 w-96 rounded-2xl border h-[600px] border-gray-300 bg-white shadow-lg transition-transform duration-300 ease-in-out ${
+        className={`fixed bottom-20 right-4 md:w-96 w-80 rounded-2xl border h-[600px] border-gray-300 bg-white shadow-lg transition-transform duration-300 ease-in-out ${
           isOpen
             ? "translate-y-0 opacity-100"
             : "translate-y-10 opacity-0 pointer-events-none"
