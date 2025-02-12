@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "./_lib/server-events";
 import bg from "@/public/bg.png";
+import Chatbot from "./_components/Chatbot";
 
 export default function Page() {
   return (
@@ -26,6 +27,7 @@ export default function Page() {
           Explore luxury cabins
         </Link>
       </div>
+      <Chatbot />
     </main>
   );
 }
