@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import React, { useState, useRef, useEffect } from "react";
 import {
   BsChatHeartFill,
@@ -9,6 +10,7 @@ import {
   BsPersonCircle,
   BsRobot,
 } from "react-icons/bs"; // Importing close icon
+import { IoIosArrowDown } from "react-icons/io";
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,15 +25,52 @@ function Chatbot() {
     setIsOpen((prevState) => !prevState);
   };
 
-  // Function to handle sending a new message
-  const handleSendMessage = () => {
+  // // Function to handle sending a new message
+  // const handleSendMessage = () => {
+  //   if (inputMessage.trim()) {
+  //     setMessages((prevMessages) => [
+  //       ...prevMessages,
+  //       { sender: "user", text: inputMessage },
+  //       { sender: "bot", text: "This is an automated response!" }, // Simulated bot reply
+  //     ]);
+  //     setInputMessage(""); // Clear input field
+  //   }
+  // };
+
+  const handleSendMessage = async () => {
     if (inputMessage.trim()) {
+      // Add user message to state
       setMessages((prevMessages) => [
         ...prevMessages,
         { sender: "user", text: inputMessage },
-        { sender: "bot", text: "This is an automated response!" }, // Simulated bot reply
       ]);
-      setInputMessage(""); // Clear input field
+
+      // Clear input field
+      setInputMessage("");
+
+      try {
+        // Send message to backend
+        const response = await axios.post("/api/chatbot", {
+          message: inputMessage,
+        });
+
+        console.log("Response:", response.data);
+        // Add bot's response to state
+        const botMessage = {
+          sender: "bot",
+          text: response.data.answer || "Sorry, I didn't understand that.",
+        };
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
+      } catch (error) {
+        console.error("Error communicating with chatbot:", error);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            sender: "bot",
+            text: "There was an error. Please try again later.",
+          },
+        ]);
+      }
     }
   };
 
@@ -57,20 +96,25 @@ function Chatbot() {
         )}
       </button>
 
-      {/* Chatbot Window */}
       <div
-        className={`fixed bottom-20 right-4 md:w-96 w-80 rounded-2xl border h-[600px] border-gray-300 bg-white shadow-lg transition-transform duration-300 ease-in-out ${
+        className={`fixed bottom-20 right-4 md:w-96 w-80 rounded-2xl border h-[600px] border-gray-300 bg-white shadow-lg transition-transform duration-300 ease-in-out bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-opacity-90 ${
           isOpen
             ? "translate-y-0 opacity-100"
             : "translate-y-10 opacity-0 pointer-events-none"
         }`}
       >
         <div className="flex items-center justify-between rounded-t-2xl bg-blue-600 p-3 text-white">
-          <h3 className="text-lg font-semibold">Chatbot</h3>
+          <h3 className="text-lg font-semibold">💬 Chat with us</h3>
+          <button
+            onClick={toggleChatbot}
+            className="rounded-full bg-blue-500 text-white p-2 hover:bg-blue-700 focus:outline-none"
+          >
+            <IoIosArrowDown className="h-5 w-5" />
+          </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
-          <div className="flex flex-col space-y-4 h-[430px]">
+          <div className="flex flex-col space-y-4 h-[430px] overflow-x-hidden">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -79,25 +123,32 @@ function Chatbot() {
                 }`}
               >
                 <div
-                  className={`flex max-w-[70%] items-center space-x-3 ${
+                  className={`flex max-w-[70%] items-start ${
                     message.sender === "bot"
                       ? "flex-row"
                       : "flex-row-reverse gap-2"
-                  }`}
+                  } space-x-2`}
                 >
-                  <div className="h-8 w-8 text-2xl text-gray-500">
-                    {message.sender === "bot" ? (
-                      <BsRobot />
-                    ) : (
-                      <BsPersonCircle />
-                    )}
+                  <div className="shrink-0">
+                    <div
+                      className={`flex items-center justify-center h-8 w-8 rounded-full text-white ${
+                        message.sender === "bot" ? "bg-gray-400" : "bg-blue-500"
+                      }`}
+                    >
+                      {message.sender === "bot" ? (
+                        <BsRobot className="text-xl" />
+                      ) : (
+                        <BsPersonCircle className="text-xl" />
+                      )}
+                    </div>
                   </div>
+
                   <div
-                    className={`rounded-lg ${
+                    className={`rounded-lg break-words ${
                       message.sender === "bot" ? "bg-gray-100" : "bg-blue-100"
-                    } p-2`}
+                    } p-2 max-w-full`}
                   >
-                    <p>{message.text}</p>
+                    <p className="text-gray-800 break-words">{message.text}</p>
                   </div>
                 </div>
               </div>
@@ -106,7 +157,7 @@ function Chatbot() {
           </div>
         </div>
 
-        <div className="absolute bottom-1 left-0 w-full border-t border-gray-300 bg-gray-100 rounded-b-lg p-2">
+        <div className="absolute bottom-0 left-0 w-full border-t border-gray-300 bg-gray-100 rounded-b-2xl p-2">
           <div className="flex items-center space-x-2">
             <input
               type="text"
@@ -114,18 +165,20 @@ function Chatbot() {
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Type a message..."
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" && inputMessage.trim() !== "") {
                   handleSendMessage();
                 }
               }}
-              className="flex-1 rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 rounded-lg border text-gray-800 border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button
-              onClick={handleSendMessage}
-              className="rounded-full bg-blue-600 text-white p-2 hover:bg-blue-700 focus:outline-none"
-            >
-              <BsFillSendFill className="h-5 w-5" />
-            </button>
+            {inputMessage.trim() && (
+              <button
+                onClick={handleSendMessage}
+                className="rounded-full bg-blue-600 text-white p-2 hover:bg-blue-700 focus:outline-none"
+              >
+                <BsFillSendFill className="h-5 w-5" />
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -134,3 +187,5 @@ function Chatbot() {
 }
 
 export default Chatbot;
+
+// Function to handle sending a new message with API call
