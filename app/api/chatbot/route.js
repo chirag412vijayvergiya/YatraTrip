@@ -39,7 +39,7 @@ const questions = [
       "Travel insurance is optional and can be added during the booking process. Please check our options for more details.",
   },
   {
-    question: "Can I book a trip for someone else?",
+    question: "Can I book a trip for someone/other else/person?",
     answer:
       "Yes, you can book a trip on behalf of someone else. Simply provide their details during the booking process.",
   },

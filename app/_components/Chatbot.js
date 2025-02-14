@@ -60,7 +60,8 @@ function Chatbot() {
         ]);
       } finally {
         setIsLoading(false);
-        setInputMessage(""); // Clear input field
+        setInputMessage("");
+        // Clear input field
       }
     }
   };
