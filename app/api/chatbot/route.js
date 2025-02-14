@@ -108,8 +108,8 @@ const getEmbedding = async (text) => {
 
 // Cosine similarity calculation
 const cosineSimilarity = (vecA, vecB) => {
-  // console.log("vecA :- ", vecA);
-  // console.log("vecB :- ", vecB);
+  console.log("vecA :- ", vecA);
+  console.log("vecB :- ", vecB);
   const dotProduct = vecA.reduce((sum, val, i) => sum + val * vecB[i], 0);
   const magnitudeA = Math.sqrt(vecA.reduce((sum, val) => sum + val * val, 0));
   const magnitudeB = Math.sqrt(vecB.reduce((sum, val) => sum + val * val, 0));
