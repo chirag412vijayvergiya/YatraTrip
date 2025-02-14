@@ -18,24 +18,13 @@ function Chatbot() {
     { sender: "bot", text: "Hello! How can I assist you today?" },
   ]);
   const [inputMessage, setInputMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null); // Reference to scroll to the last message
 
   // Function to toggle chatbot visibility
   const toggleChatbot = () => {
     setIsOpen((prevState) => !prevState);
   };
-
-  // // Function to handle sending a new message
-  // const handleSendMessage = () => {
-  //   if (inputMessage.trim()) {
-  //     setMessages((prevMessages) => [
-  //       ...prevMessages,
-  //       { sender: "user", text: inputMessage },
-  //       { sender: "bot", text: "This is an automated response!" }, // Simulated bot reply
-  //     ]);
-  //     setInputMessage(""); // Clear input field
-  //   }
-  // };
 
   const handleSendMessage = async () => {
     if (inputMessage.trim()) {
@@ -45,11 +34,10 @@ function Chatbot() {
         { sender: "user", text: inputMessage },
       ]);
 
-      // Clear input field
-      setInputMessage("");
-
+      setIsLoading(true);
       try {
         // Send message to backend
+
         const response = await axios.post("/api/chatbot", {
           message: inputMessage,
         });
@@ -70,6 +58,9 @@ function Chatbot() {
             text: "There was an error. Please try again later.",
           },
         ]);
+      } finally {
+        setIsLoading(false);
+        setInputMessage(""); // Clear input field
       }
     }
   };
@@ -153,6 +144,23 @@ function Chatbot() {
                 </div>
               </div>
             ))}
+            {/* Show loading dots if the bot is thinking */}
+            {isLoading && (
+              <div className="flex justify-start space-x-2">
+                <div className="shrink-0">
+                  <div className="flex items-center justify-center h-8 w-8 rounded-full text-white bg-gray-400">
+                    <BsRobot className="text-xl" />
+                  </div>
+                </div>
+                <div className="rounded-lg  p-2 max-w-full">
+                  <div class="flex gap-2">
+                    <div class="w-3 h-3 rounded-full bg-blue-500 animate-bounce"></div>
+                    <div class="w-3 h-3 rounded-full bg-blue-500 animate-bounce [animation-delay:-.3s]"></div>
+                    <div class="w-3 h-3 rounded-full bg-blue-500 animate-bounce [animation-delay:-.5s]"></div>
+                  </div>
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
         </div>
@@ -187,5 +195,3 @@ function Chatbot() {
 }
 
 export default Chatbot;
-
-// Function to handle sending a new message with API call
