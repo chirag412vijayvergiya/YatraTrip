@@ -120,7 +120,7 @@ export default function NavigationClient({ session }) {
               </Link>
             </li>
           ))}
-          {session?.user?.image && (
+          {session?.user?.image ? (
             <li onClick={() => setMenuOpen(false)}>
               <Link
                 href="/account"
@@ -137,6 +137,13 @@ export default function NavigationClient({ session }) {
                 <span>{session.user.name}</span>
               </Link>
             </li>
+          ) : (
+            <Link
+              href="/account"
+              className="hover:text-accent-400 transition-colors"
+            >
+              Guest area
+            </Link>
           )}
         </ul>
       </div>

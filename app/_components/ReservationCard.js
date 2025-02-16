@@ -81,7 +81,9 @@ function ReservationCard({ booking, onDelete }) {
         </p>
 
         <div className="flex gap-5 mt-auto items-baseline flex-row">
-          <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
+          <p className="text-xl font-semibold text-accent-400">
+            &#8377;{totalPrice}
+          </p>
           <div className="flex gap-2">
             <p className="text-primary-300">&bull;</p>
             <p className="text-sm md:text-lg text-primary-300">
